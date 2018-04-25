@@ -148,6 +148,10 @@
     delegate_to: "{{ openshift_ca_host }}"
     run_once: true
   - copy:
+      src: "{{ openshift_additional_ca }}"
+      dest: "{{ openshift_ca_clientconfig_tmpdir.stdout }}/"
+    when: openshift_additional_ca is defined
+  - copy:
       src: "{{ openshift_ca_config_dir }}/ca.crt"
       dest: "{{ openshift_ca_clientconfig_tmpdir.stdout }}/"
       remote_src: true
